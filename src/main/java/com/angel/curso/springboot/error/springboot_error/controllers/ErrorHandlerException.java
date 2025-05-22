@@ -1,6 +1,8 @@
 package com.angel.curso.springboot.error.springboot_error.controllers;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -27,6 +29,20 @@ public class ErrorHandlerException {
 
         return ResponseEntity.internalServerError().body(error);
     }
+
+    @ExceptionHandler(NumberFormatException.class)
+    public Map<String, Object> numberFomartException(Exception ex){
+
+        Map<String, Object> error = new HashMap<>();
+        error.put("date", new Date());
+        error.put("error", "numero invalido o incorrecto, no tiene formato el digito!");
+        error.put("message", ex.getMessage());
+        error.put("status", HttpStatus.INTERNAL_SERVER_ERROR.value());
+
+        return error; 
+    }
+
+
 
     @ExceptionHandler(NoHandlerFoundException.class)
     public ResponseEntity<Error> noFoundEx(NoHandlerFoundException e){
