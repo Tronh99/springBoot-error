@@ -39,13 +39,13 @@ public class User {
     public Role getRole() {
         return role;
     }
-        public String getRoleName() {
-        return role.getName();
-    }
     public void setRole(Role role) {
         this.role = role;
     }
     
+    //     public String getRoleName() {
+    //     return role.getName();
+    // }
 
     
 

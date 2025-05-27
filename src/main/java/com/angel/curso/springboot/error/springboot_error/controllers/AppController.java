@@ -27,8 +27,8 @@ public class AppController {
     @GetMapping
     public String index(){
 
-        int value = 100/0;
-        //int value = Integer.parseInt("hola");
+        // int value = 100/0;
+        int value = Integer.parseInt("20x");
         System.out.print(value);
         return "ok 200";
     }
@@ -36,11 +36,8 @@ public class AppController {
 
     @GetMapping("/show/{id}")
     public User showUsers(@PathVariable(name = "id") Long id) {
-        User user = service.findById(id);
+        User user = service.findById(id).orElseThrow(() -> new UserNotFoundException("Error el usuario no existe!"));
 
-        if (user == null) {
-            throw new UserNotFoundException("Error el usuario no existe!");
-        }
         System.out.println(user.getLastname());
         return user;
     }
